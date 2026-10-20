@@ -5,7 +5,7 @@ function Header({ cartCount }) { // becomes state in Part C
  <nav className="nav">
  <a href="#">Vendors</a>
  <a href="#">My Orders</a>
- <a href="#" className="cart">
+ <a href="#" className="cart ">
  Cart <span className="badge">{cartCount}</span>
  </a>
  </nav>

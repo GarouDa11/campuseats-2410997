@@ -11,11 +11,10 @@ function App() {
  function handleAddToCart(item) {
  setCart((prevCart) => [...prevCart, item]) // a NEW array, never cart.push()
  }
- // in the JSX:
- <Header cartCount={cart.length} />
+
  return (
  <>
- <Header />
+ <Header cartCount={cart.length} />
  <main className="container">
  <section>
  <h2 className="section-title">Choose a vendor</h2>
@@ -32,7 +31,7 @@ function App() {
  </section>
  <section>
  <h2 className="section-title">Menu: {selectedVendor.name}</h2>
- <MenuList items={selectedVendor.menu} onAdd={handleAddToCart} />
+<MenuList items={selectedVendor.menu} onAdd={handleAddToCart} />
  </section>
  </main>
  <Footer />
