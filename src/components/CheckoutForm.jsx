@@ -35,7 +35,7 @@ function CheckoutForm({ onPlaceOrder }) {
     event.preventDefault(); // stop the page reloading
     const found = validate(values);
     setErrors(found);
-    // TODO: if found has no keys, call onPlaceOrder(values)
+    if (Object.keys(found).length === 0) onPlaceOrder(values);
   }
   return (
     <form className="card form" onSubmit={handleSubmit} noValidate>
@@ -62,8 +62,16 @@ function CheckoutForm({ onPlaceOrder }) {
           </option>
         ))}
       </select>
-      {/* TODO: show errors.mahallah */}
-      {/* TODO: label + <input type="time" name="pickupTime" ...> + its error */}
+      {errors.mahallah && <p className="field-error">{errors.mahallah}</p>}
+      <label htmlFor="pickupTime">Pickup Time</label>
+      <input
+        type="time"
+        id="pickupTime"
+        name="pickupTime"
+        value={values.pickupTime}
+        onChange={handleChange}
+      />
+      {errors.pickupTime && <p className="field-error">{errors.pickupTime}</p>}
       <button type="submit" className="btn">
         Place order
       </button>

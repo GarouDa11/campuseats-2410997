@@ -13,3 +13,4 @@ function Header({ cartCount, onShowMenu, onShowCart }) {
     </header>
   );
 }
+export default Header;
