@@ -251,7 +251,7 @@ button.card:hover {
 .form select {
   padding: 0.5rem;
   border: 1px solid #c5cbd3;
-  borderradius: 8px;
+  border-radius: 8px;
   font: inherit;
 }
 .field-error {
