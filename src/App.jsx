@@ -1,40 +1,53 @@
-import { useState } from "react";
-import Header from "./components/Header.jsx";
-import VendorCard from "./components/VendorCard.jsx";
-import MenuList from "./components/MenuList.jsx";
-import Footer from "./components/Footer.jsx";
+import { useEffect, useState } from "react";
 import { Loading, ErrorMessage } from "./components/Status.jsx";
 
 function App() {
-  const [selectedVendorId, setSelectedVendorId] = useState(vendors[0].id);
-  const selectedVendor = vendors.find((v) => v.id === selectedVendorId);
-  const [cart, setCart] = useState([]);
+  // Fetched data: one piece of state for each situation
+  const [vendors, setVendors] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [reloadKey, setReloadKey] = useState(0); // bump it to fetch again
+  const [selectedVendorId, setSelectedVendorId] = useState(null);
+  const [cart, setCart] = useState([]); // lines of { item, qty }
+  const [view, setView] = useState("menu"); // 'menu' | 'cart' | 'done'
+  const [lastOrder, setLastOrder] = useState(null);
+
   function handleAddToCart(item) {
     setCart((prevCart) => [...prevCart, item]); // a NEW array, never cart.push()
   }
-
+  const cartCount = cart.reduce((total, line) => total + line.qty, 0);
+  let content;
+  if (view === "cart") {
+    content = (
+      <CartPage
+        cart={cart}
+        onChangeQty={handleChangeQty}
+        onRemove={handleRemove}
+        onPlaceOrder={handlePlaceOrder}
+      />
+    );
+  } else if (view === "done") {
+    content = <p>Order placed.</p>; // TODO (B5): show pickup time and total
+  } else if (loading) {
+    content = <Loading />;
+  } else if (error) {
+    content = (
+      <ErrorMessage
+        message={error}
+        onRetry={() => setReloadKey((k) => k + 1)}
+      />
+    );
+  } else {
+    content = <>{/* TODO: your Week 2 vendor cards + MenuList go here */}</>;
+  }
   return (
     <>
-      <Header cartCount={cart.length} />
-      <main className="container">
-        <section>
-          <h2 className="section-title">Choose a vendor</h2>
-          <div className="vendor-grid">
-            {vendors.map((vendor) => (
-              <VendorCard
-                key={vendor.id}
-                vendor={vendor}
-                isSelected={vendor.id === selectedVendorId}
-                onSelect={setSelectedVendorId}
-              />
-            ))}
-          </div>
-        </section>
-        <section>
-          <h2 className="section-title">Menu: {selectedVendor.name}</h2>
-          <MenuList items={selectedVendor.menu} onAdd={handleAddToCart} />
-        </section>
-      </main>
+      <Header
+        cartCount={cartCount}
+        onShowMenu={() => setView("menu")}
+        onShowCart={() => setView("cart")}
+      />
+      <main className="container">{content}</main>
       <Footer />
     </>
   );
