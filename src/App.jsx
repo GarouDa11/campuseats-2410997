@@ -57,7 +57,9 @@ function App() {
       if (existing) {
         // Already in the cart: copy every line, and add 1 to the matching one
         return prev.map((line) =>
-          line.item.id === item.id ? { ...line, qty: line.qty + 1 } : line,
+          line.item.id === item.id
+            ? { ...line, qty: line.qty + 1, note: "" }
+            : line,
         );
       }
       return [...prev, { item, qty: 1 }]; // new line
@@ -81,6 +83,12 @@ function App() {
     setCart((prev) => prev.filter((line) => line.item.id !== itemId));
   }
 
+  function handleChangeNote(itemId, note) {
+    setCart((prev) =>
+      prev.map((line) => (line.item.id === itemId ? { ...line, note } : line)),
+    );
+  }
+
   const cartCount = cart.reduce((total, line) => total + line.qty, 0);
   const selectedVendor = vendors.find((v) => v.id === selectedVendorId);
   let content;
@@ -89,6 +97,7 @@ function App() {
       <CartPage
         cart={cart}
         onChangeQty={handleChangeQty}
+        onChangeNote={handleChangeNote}
         onRemove={handleRemove}
         onPlaceOrder={handlePlaceOrder}
       />

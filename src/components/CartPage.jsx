@@ -1,6 +1,6 @@
 import CartItem from "./CartItem.jsx";
 import CheckoutForm from "./CheckoutForm.jsx";
-function CartPage({ cart, onChangeQty, onRemove, onPlaceOrder }) {
+function CartPage({ cart, onChangeQty, onRemove, onChangeNote, onPlaceOrder }) {
   if (cart.length === 0) {
     return (
       <p className="muted">
@@ -18,10 +18,12 @@ function CartPage({ cart, onChangeQty, onRemove, onPlaceOrder }) {
               key={line.item.id}
               line={line}
               onChangeQty={onChangeQty}
+              onChangeNote={onChangeNote}
               onRemove={onRemove}
             />
           ))}
         </ul>
+
         <p className="cart-total">Total: RM {total.toFixed(2)}</p>
       </div>
       <CheckoutForm onPlaceOrder={onPlaceOrder} />
