@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-function VendorCard({ vendor, isSelected, onSelect }) {
+
+function VendorCard({ vendor }) {
   return (
     <Link to={`/vendor/${vendor.id}`} className="card vendor-card">
       <div className="thumb" aria-hidden="true">

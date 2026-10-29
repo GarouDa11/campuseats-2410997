@@ -1,10 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import CartItem from "../components/CartItem.jsx";
 import CheckoutForm from "..components/CheckoutForm.jsx";
 import useCart from "../hooks/useCart.js";
 
-function CartPage({ onPlaceOrder }) {
+function CartPage() {
   const { cart, total, changeQty, changeNote, removeFromCart, placeOrder } =
     useCart();
+  const navigate = useNavigate();
 
   if (cart.length === 0) {
     return (
@@ -14,8 +16,8 @@ function CartPage({ onPlaceOrder }) {
     );
   }
   function handlePlaceOrder(details) {
-    const order = placeOrder(details);
-    onOrderPlaced(order);
+    placeOrder(details);
+    navigate("/orders");
   }
   return (
     <div className="cart-layout">
