@@ -1,9 +1,12 @@
 import MenuItemCard from "./MenuItemCard.jsx";
-function MenuList({ items, onAdd }) {
+import useCart from "../hooks/useCart.js";
+
+function MenuList({ items }) {
+  const { addToCart } = useCart();
   return (
     <div className="grid">
       {items.map((item) => (
-        <MenuItemCard key={item.id} item={item} onAdd={onAdd} />
+        <MenuItemCard key={item.id} item={item} onAdd={addToCart} />
       ))}
     </div>
   );
