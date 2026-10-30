@@ -53,7 +53,9 @@ function CartProvider({ children }) {
     setCart([]);
     return order;
   }
-
+  function receiveOrder(orderId) {
+    setOrders((prev) => prev.filter((order) => order.id !== orderId));
+  }
   const value = {
     cart,
     orders,
@@ -64,6 +66,7 @@ function CartProvider({ children }) {
     changeNote,
     removeFromCart,
     placeOrder,
+    receiveOrder,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

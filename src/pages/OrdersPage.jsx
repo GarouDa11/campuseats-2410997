@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import useCart from "../hooks/useCart.js";
 
 function OrdersPage() {
-  const { orders } = useCart();
+  const { orders, receiveOrder } = useCart();
 
   if (orders.length === 0) {
     return (
@@ -35,6 +35,21 @@ function OrdersPage() {
             ))}
           </ul>
           <p className="cart-total">Total: RM {order.total.toFixed(2)}</p>
+          <button
+            type="button"
+            className="btn"
+            onClick={() => {
+              if (
+                window.confirm(
+                  "Mark this order as received? It will be removed.",
+                )
+              ) {
+                receiveOrder(order.id);
+              }
+            }}
+          >
+            Mark as received
+          </button>
         </article>
       ))}
     </section>
