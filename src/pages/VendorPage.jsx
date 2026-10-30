@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router";
 import useVendors from "../hooks/useVendors.js";
 import { Loading, ErrorMessage } from "../components/Status.jsx";
 import MenuList from "../components/MenuList.jsx";

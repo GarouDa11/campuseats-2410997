@@ -1,9 +1,11 @@
-import { useState } from "react";
-import { Loading, ErrorMessage } from "./components/Status.jsx";
-import useVendors from "./hooks/useVendors.js";
+import { BrowserRouter, Routes, Route } from "react-router";
+import Layout from "./components/Layout.jsx";
+import HomePage from "./pages/HomePage.jsx";
+import OrdersPage from "./pages/OrdersPage.jsx";
+import NotFoundPage from "./pages/NotFoundPage.jsx";
+import CartProvider from "./context/CartProvider.jsx";
+import VendorPage from "./pages/VendorPage.jsx";
 import CartPage from "./pages/CartPage.jsx";
-import VendorCard from "./components/VendorCard.jsx";
-import MenuList from "./components/MenuList.jsx";
 
 function App() {
   return (

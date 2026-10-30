@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 function useVendors() {
   const [vendors, setVendors] = useState([]);
@@ -15,11 +15,7 @@ function useVendors() {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
       })
-      .then((data) => {
-        setVendors(data);
-        // Keep the vendor the user already picked; otherwise pick the first one.
-        setSelectedVendorId((current) => current ?? data[0]?.id ?? null);
-      })
+      .then((data) => setVendors(data))
       .catch((err) => {
         if (err.name !== "AbortError") {
           setError(err.message);
@@ -28,9 +24,10 @@ function useVendors() {
       .finally(() => {
         if (!controller.signal.aborted) setLoading(false);
       });
-    return () => controller.abort(); // cleanup: cancel an old request
+    return () => controller.abort();
   }, [reloadKey]);
 
+  const reload = useCallback(() => setReloadKey((k) => k + 1), []);
   return { vendors, loading, error, reload };
 }
 export default useVendors;

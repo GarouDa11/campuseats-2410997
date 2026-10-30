@@ -1,6 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import CartItem from "../components/CartItem.jsx";
-import CheckoutForm from "..components/CheckoutForm.jsx";
+import CheckoutForm from "../components/CheckoutForm.jsx";
 import useCart from "../hooks/useCart.js";
 
 function CartPage() {

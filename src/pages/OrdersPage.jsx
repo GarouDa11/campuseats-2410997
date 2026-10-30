@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import useCart from "../hooks/useCart.js";
 
 function OrdersPage() {
@@ -28,7 +28,7 @@ function OrdersPage() {
             {order.lines.map((line) => (
               <li key={line.item.id}>
                 {line.qty} × {line.item.name}
-                {line.note.trim() && (
+                {line.note?.trim() && (
                   <span className="muted"> ({line.note})</span>
                 )}
               </li>
