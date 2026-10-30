@@ -25,3 +25,10 @@
 - What I asked for: Compressed the VendorCard.jsx and Menulist to be insert in view content
 - What I kept, changed or rejected, and why: I changed because i kinda confuse what to include in there.
 - One thing the AI got wrong and how I fixed it: I used its drafts, but the naming i use its based on my own component name.
+
+## Week 4
+
+- Tool(s): Claude ai
+- What I asked for: I ask him to teach me how to solve some task in lab sheet especially B2 and B3.(one at a time for understanding)
+- What I kept, changed or rejected, and why: I tried my way of solving but loads of error comming, so i changed to Ai way as it start to get complex
+- One thing the AI got wrong and how I fixed it: the ai mistakenly use the react-router-dom which is not installed. so instead, i replace to react-router in any files that using the dom.
